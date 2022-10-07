@@ -1,3 +1,4 @@
+import  os
 import dj_database_url
 from decouple import config
 from pathlib import Path
@@ -161,7 +162,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT=BASE_DIR / 'staticfiles'
+# STATIC_ROOT=BASE_DIR / 'staticfiles'
+if DEBUG:
+   STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, 'static'),
+   ]
+else:
+   STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
